@@ -84,12 +84,54 @@ def optimize_single_project(frame_w, frame_l, qty, stock_lengths, oversize=1.20,
     total_pieces_used = pulp.lpSum(pieces[i] * z[(i, s, b)] for i in I for s in S for b in bars_for_s(s))
     prob += total_stock_used - total_pieces_used
 
-    # Solve with CBC, fall back to HiGHS if needed
+
+
+
+
+
+    # Solve with HiGHS via Python API (highspy). Falls back to CBC if available.
+    solver_ok = False
+    err_msgs = []
+
+    # 1) Try HiGHS (Python API) — does not need a system binary
     try:
-        prob.solve(pulp.PULP_CBC_CMD(msg=False, timeLimit=int(time_limit), fracGap=frac_gap))
-    except Exception:
-        from pulp import HiGHS_CMD
-        prob.solve(HiGHS_CMD(msg=False, timeLimit=int(time_limit)))
+        from pulp import HiGHS
+        prob.solve(HiGHS(msg=False, timeLimit=int(time_limit)))
+        solver_ok = True
+    except Exception as e:
+        err_msgs.append(f"HiGHS(py) failed: {e}")
+
+    # 2) Fallback to CBC if the host provides it
+    if not solver_ok:
+        try:
+            prob.solve(pulp.PULP_CBC_CMD(msg=False, timeLimit=int(time_limit), fracGap=frac_gap))
+            solver_ok = True
+        except Exception as e:
+            err_msgs.append(f"CBC failed: {e}")
+
+    # 3) Final fallback to command-line HiGHS only if available (usually not on Streamlit Cloud)
+    if not solver_ok:
+        try:
+            from pulp import HiGHS_CMD
+            prob.solve(HiGHS_CMD(msg=False, timeLimit=int(time_limit)))
+            solver_ok = True
+        except Exception as e:
+            err_msgs.append(f"HiGHS(cmd) failed: {e}")
+
+    if not solver_ok:
+        raise RuntimeError(
+            "No MILP solver available on this host. "
+            "Install one of: highspy (preferred) or system CBC. "
+            + " | ".join(err_msgs)
+        )
+
+                                
+    # Solve with CBC, fall back to HiGHS if needed
+#    try:
+ #       prob.solve(pulp.PULP_CBC_CMD(msg=False, timeLimit=int(time_limit), fracGap=frac_gap))
+  #  except Exception:
+   #     from pulp import HiGHS_CMD
+    #    prob.solve(HiGHS_CMD(msg=False, timeLimit=int(time_limit)))
 
     status = pulp.LpStatus.get(prob.status, str(prob.status))
 
