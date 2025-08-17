@@ -5,6 +5,27 @@ import pandas as pd
 import streamlit as st
 import pulp
 
+
+import streamlit as st
+
+def require_password():
+    if "pw_ok" not in st.session_state:
+        st.session_state.pw_ok = False
+    if st.session_state.pw_ok:
+        return
+    st.title("Door Frame Cutting Optimization")
+    pwd = st.text_input("Enter access password", type="password")
+    if pwd:
+        if pwd == st.secrets.get("APP_PASSWORD"):
+            st.session_state.pw_ok = True
+            st.experimental_rerun()
+        else:
+            st.error("Incorrect password.")
+    st.stop()
+
+require_password()  # <-- place this before the rest of the app code
+
+
 st.set_page_config(page_title="Door Frame Cutting Optimizer", page_icon="🪚", layout="centered")
 
 # ---------------------------- Helpers ----------------------------
