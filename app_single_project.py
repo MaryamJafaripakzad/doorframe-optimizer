@@ -42,7 +42,7 @@ def round_piece_len(x: float) -> float:
     return x
 
 def optimize_single_project(frame_w, frame_l, qty, stock_lengths, oversize=1.20, kerf=0.0,
-                            time_limit=60, frac_gap=0.001):
+                            time_limit=300, frac_gap=0.001):
     """
     Minimize waste using a bin-packing MILP:
       - Each door needs 1 width piece + 2 length pieces (oversized by factor).
@@ -218,8 +218,9 @@ with st.expander("Inputs", expanded=True):
     with col2:
         frame_l = st.number_input("Frame_L (inches)", min_value=1.0, step=0.1, value=97.5)
         kerf = st.number_input("Saw kerf per cut (inches)", value=0.0, min_value=0.0, max_value=0.25, step=0.01)
-        time_limit = st.slider("Solver time limit (seconds)", min_value=10, max_value=300, value=60, step=10)
-
+        #time_limit = st.slider("Solver time limit (seconds)", min_value=10, max_value=300, value=60, step=10)
+        time_limit = 300
+        
 with st.expander("Inventory selection", expanded=True):
     units = st.radio("Inventory units", ["feet", "inches"], horizontal=True, index=0)
     if units == "feet":
