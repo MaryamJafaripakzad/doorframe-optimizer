@@ -13,14 +13,10 @@ def require_password():
         return
 
 
-
+    st.title("Door Frame Cutting Optimization")
     st.markdown("#### Enter access password")
     pwd = st.text_input("Password", type="password", label_visibility="collapsed")
 
-
-    #st.title("Door Frame Cutting Optimization")
-    
-    #pwd = st.text_input("Enter access password", type="password")
 
     if pwd:
         # Compare to the secret you set in Streamlit Cloud
