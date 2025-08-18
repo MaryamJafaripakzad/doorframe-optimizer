@@ -195,21 +195,26 @@ def optimize_single_project(frame_w, frame_l, qty, stock_lengths, oversize=1.20,
 
 # ---------------------------- UI ----------------------------
 
-st.header("Single Project: Door Frame Cutting Optimization")
-st.markdown("""
-###How to use this app
+st.header("Single Project · Door Frame Cutting Optimization")
+st.markdown(
+    """
+**How to use**
 
-1. In **Inputs**, enter:
-   - **Frame_W** (inches)
-   - **Frame_L** (inches)
-   - **LINE_QTY** (# of doors)
-2. In **Inventory selection**, choose your stock sizes (feet or inches).
-3. (Optional) Adjust **Oversize factor** (default 1.20) and **Saw kerf**.
+1. Open **Inputs** and enter:
+   - **Frame_W** *(inches)*
+   - **Frame_L** *(inches)*
+   - **LINE_QTY** *(number of doors)*
+2. Open **Inventory selection** and choose your available stock sizes *(feet or inches)*.
+3. *(Optional)* Adjust **Oversize factor** *(default **1.20**)* and **Saw kerf**.
 4. Click **Run optimization**.
-5. Review counts per stock size, waste & utilization, and click **Download result as CSV**.
+5. Review results (counts by stock length, total waste, utilization) and **Download result as CSV**.
 
-*Notes:* Each door frame uses 1 width piece and 2 length pieces. All required pieces are oversized by the chosen factor and must be single, unjoined pieces.
-""")
+**Notes**
+- Each door frame uses **1 width piece** and **2 length pieces**.
+- All required pieces include the oversize factor and must be **single, unjoined** cuts.
+"""
+)
+
 
 with st.expander("Inputs", expanded=True):
     col1, col2 = st.columns(2)
