@@ -198,7 +198,7 @@ def optimize_single_project(frame_w, frame_l, qty, stock_lengths, oversize=1.20,
 st.header("Door Frame Cutting Optimization")
 # Replace your current header/title + markdown with this:
 st.markdown("""
-### How to use
+### How to use the app:
 
 1. In **Inputs**, enter **Frame_W** (in), **Frame_L** (in), and **LINE_QTY** (# doors).
 2. *(Optional)* Adjust **Oversize factor** (default **1.20**) and **Saw kerf**.
