@@ -12,7 +12,7 @@ def require_password():
     if st.session_state.get("pw_ok"):
         return
 
-    st.title("Door Frame Cutting Optimization")
+    st.set_page_config(page_title="Door Frame Cutting Optimizer", page_icon="🪚", layout="centered")
     pwd = st.text_input("Enter access password", type="password")
 
     if pwd:
@@ -31,7 +31,6 @@ require_password()  # <-- keep this ABOVE the rest of your app content
 
 
 
-st.set_page_config(page_title="Door Frame Cutting Optimizer", page_icon="🪚", layout="centered")
 
 # ---------------------------- Helpers ----------------------------
 def round_piece_len(x: float) -> float:
