@@ -194,7 +194,7 @@ def optimize_single_project(frame_w, frame_l, qty, stock_lengths, oversize=1.20,
     }
 
 # ---------------------------- UI ----------------------------
-st.title("Single Project — Door Frame Cutting Optimization")
+#st.title("Single Project — Door Frame Cutting Optimization")
 
 with st.expander("Inputs", expanded=True):
     col1, col2 = st.columns(2)
