@@ -202,11 +202,11 @@ st.markdown("""
    - **Frame_L** (inches)
    - **LINE_QTY** (# of doors)
 2. In **Inventory selection**, choose your stock sizes (feet or inches).
-3. (Optional) Adjust **Oversize** (default 1.20), **Saw kerf**, and the **Solver time limit**.
+3. (Optional) Adjust **Oversize factor** (default 1.20), **Saw kerf**, and the **Solver time limit**.
 4. Click **Run optimization**.
 5. Review counts per stock size, waste & utilization, and click **Download result as CSV**.
 
-*Notes:* Each door uses 1 width piece and 2 length pieces. All required pieces are oversized by the chosen factor and must be single, unjoined pieces.
+*Notes:* Each door frame uses 1 width piece and 2 length pieces. All required pieces are oversized by the chosen factor and must be single, unjoined pieces.
 """)
 
 with st.expander("Inputs", expanded=True):
