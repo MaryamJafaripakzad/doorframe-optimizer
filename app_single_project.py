@@ -11,8 +11,9 @@ def require_password():
     # If already verified, just continue
     if st.session_state.get("pw_ok"):
         return
-
-    st.set_page_config(page_title="Door Frame Cutting Optimizer", page_icon="🪚", layout="centered")
+        
+    st.title("Door Frame Cutting Optimization")
+    
     pwd = st.text_input("Enter access password", type="password")
 
     if pwd:
@@ -30,6 +31,7 @@ require_password()  # <-- keep this ABOVE the rest of your app content
 # ---- END PASSWORD GATE ----
 
 
+st.set_page_config(page_title="Door Frame Cutting Optimizer", page_icon="🪚", layout="centered")
 
 
 # ---------------------------- Helpers ----------------------------
