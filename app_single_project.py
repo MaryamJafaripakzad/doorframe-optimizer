@@ -6,24 +6,29 @@ import streamlit as st
 import pulp
 
 
-import streamlit as st
-
+# ---- PASSWORD GATE (put this near the very top of the file) ----
 def require_password():
-    if "pw_ok" not in st.session_state:
-        st.session_state.pw_ok = False
-    if st.session_state.pw_ok:
+    # If already verified, just continue
+    if st.session_state.get("pw_ok"):
         return
+
     st.title("Door Frame Cutting Optimization")
     pwd = st.text_input("Enter access password", type="password")
+
     if pwd:
+        # Compare to the secret you set in Streamlit Cloud
         if pwd == st.secrets.get("APP_PASSWORD"):
-            st.session_state.pw_ok = True
-            st.experimental_rerun()
+            st.session_state["pw_ok"] = True
+            return  # allow the rest of the app to run this time
         else:
             st.error("Incorrect password.")
-    st.stop()
+            st.stop()  # block the rest of the app
 
-require_password()  # <-- place this before the rest of the app code
+    st.stop()  # no password yet → stop the app here
+
+require_password()  # <-- keep this ABOVE the rest of your app content
+# ---- END PASSWORD GATE ----
+
 
 
 st.set_page_config(page_title="Door Frame Cutting Optimizer", page_icon="🪚", layout="centered")
