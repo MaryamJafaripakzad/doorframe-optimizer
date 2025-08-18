@@ -194,15 +194,17 @@ def optimize_single_project(frame_w, frame_l, qty, stock_lengths, oversize=1.20,
     }
 
 # ---------------------------- UI ----------------------------
+
+st.header("Single Project: Door Frame Cutting Optimization")
 st.markdown("""
-**How to use this app**
+###How to use this app
 
 1. In **Inputs**, enter:
    - **Frame_W** (inches)
    - **Frame_L** (inches)
    - **LINE_QTY** (# of doors)
 2. In **Inventory selection**, choose your stock sizes (feet or inches).
-3. (Optional) Adjust **Oversize factor** (default 1.20), **Saw kerf**, and the **Solver time limit**.
+3. (Optional) Adjust **Oversize factor** (default 1.20) and **Saw kerf**.
 4. Click **Run optimization**.
 5. Review counts per stock size, waste & utilization, and click **Download result as CSV**.
 
