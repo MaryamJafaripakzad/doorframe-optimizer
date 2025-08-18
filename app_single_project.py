@@ -13,7 +13,7 @@ def require_password():
         return
 
 
-    st.title("Door Frame Cutting Optimization")
+    #st.title("Door Frame Cutting Optimization")
     st.markdown("#### Enter access password")
     pwd = st.text_input("Password", type="password", label_visibility="collapsed")
 
